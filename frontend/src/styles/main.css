@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;600;700&family=Young+Serif&display=swap');
+
+:root {
+  --bone: #E9E1CE;
+  --ink: #17140F;
+  --plum-night: #2A1B2E;
+  --vermilion: #FF4A1C;
+  --verdigris: #1F6F5C;
+  --uv-lime: #D6F23A;
+  --oxide: #9B5B2E;
+  --fog: #C9BFA6;
+
+  --font-heading: 'Young Serif', serif;
+  --font-mono: 'Martian Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-heading);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.mono-font {
+  font-family: var(--font-mono);
+}
+
+.brutalist-card {
+  background-color: var(--bone);
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0px var(--ink);
+  padding: 1.5rem;
+  border-radius: 0px;
+}
+
+.brutalist-btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--uv-lime);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0px var(--ink);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  border-radius: 0px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.brutalist-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px var(--ink);
+}
+
+.brutalist-btn:active {
+  transform: translate(0px, 0px);
+  box-shadow: 1px 1px 0px var(--ink);
+}
+
+.brutalist-input, .brutalist-textarea {
+  font-family: var(--font-mono);
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--ink);
+  background-color: #F5EFE0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  border-radius: 0px;
+}
+
+.brutalist-input:focus, .brutalist-textarea:focus {
+  outline: 3px solid var(--uv-lime);
+  outline-offset: 2px;
+}
+
+.wavy-underline {
+  text-decoration: underline wavy var(--vermilion) 2px;
+  background-color: rgba(255, 74, 28, 0.1);
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+.wavy-underline:hover {
+  background-color: var(--uv-lime);
+  color: var(--ink);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border: 1px solid var(--ink);
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.badge-silent { background-color: var(--vermilion); color: #FFF; }
+.badge-assumption { background-color: var(--uv-lime); color: var(--ink); }
+.badge-conflict { background-color: var(--plum-night); color: var(--uv-lime); }
