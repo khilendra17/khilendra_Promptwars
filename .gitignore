@@ -5,6 +5,7 @@ __pycache__/
 *.so
 .Python
 env/
+venv/
 build/
 develop-eggs/
 dist/
@@ -31,10 +32,14 @@ frontend/dist/
 frontend/coverage/
 .deps/
 
-# Environments
+# Environments & Keys
 .env
 .env.local
 .env.*.local
+*.pem
+*.key
+credentials/
+service-account*.json
 
 # IDEs & System
 .vscode/
