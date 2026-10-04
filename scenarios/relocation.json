@@ -1,0 +1,7 @@
+{
+  "id": "relocation",
+  "title": "Relocating to London for High Pay vs Staying Local",
+  "options": ["Relocate to London", "Stay at Current Job"],
+  "reasoning": "Moving to London offers a 40% salary bump and prestigious company branding. However, cost of living is very high, I will be far from family support, and my spouse would need to restart their local medical residency.",
+  "context": "Mid-level software architect with family."
+}

@@ -5,7 +5,6 @@ import { Navbar } from './components/Navbar';
 import { DemoScenario } from './components/ScenarioChips';
 import { DescribeScreen } from './features/DescribeScreen';
 import { LandingScreen } from './features/LandingScreen';
-import { ReexamineScreen } from './features/ReexamineScreen';
 import { ScanningScreen } from './features/ScanningScreen';
 import { SummaryScreen } from './features/SummaryScreen';
 import { XrayResultScreen } from './features/XrayResultScreen';

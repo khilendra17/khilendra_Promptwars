@@ -1,6 +1,7 @@
 """Guardrail verifier ensuring non-advisory tone and quote grounding."""
 
 import re
+
 from app.models.schemas import BlindSpot
 
 FORBIDDEN_PATTERNS = [

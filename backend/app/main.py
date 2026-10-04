@@ -1,11 +1,15 @@
 """FastAPI application entry point for SCOTOMA backend."""
 
+import os
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import AsyncGenerator
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
+
 from app.api.routes import limiter, router
 from app.config import settings
 from app.db import init_db
@@ -43,3 +47,12 @@ app.include_router(router)
 def health_check() -> dict[str, str]:
     """Health check endpoint."""
     return {"status": "ok"}
+
+
+# Serve static built React frontend if directory exists
+static_dir = os.path.join(os.path.dirname(__file__), "..", "static")
+if not os.path.exists(static_dir):
+    static_dir = os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "dist")
+
+if os.path.exists(static_dir):
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")

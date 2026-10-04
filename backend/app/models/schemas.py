@@ -1,6 +1,7 @@
 """Pydantic schemas for request/response bodies and domain entities."""
 
 from typing import Literal
+
 from pydantic import BaseModel, Field
 
 LensId = Literal[

@@ -1,14 +1,15 @@
 """SQLModel database table definitions for sessions, analyses, and answers."""
 
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
-from sqlmodel import Column, Field, JSON, SQLModel
+
+from sqlmodel import JSON, Column, Field, SQLModel
 
 
 def utc_now() -> datetime:
     """Return current UTC timestamp."""
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 
 class SessionRecord(SQLModel, table=True):

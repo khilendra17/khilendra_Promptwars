@@ -38,57 +38,73 @@ Copy `.env.example` to `.env` and set your Google Gemini API key:
 cp .env.example .env
 ```
 
-### 2. Backend Setup
+### 2. Run Backend & Frontend locally
 
 ```bash
-python -m venv venv
-# On Windows (PowerShell):
-.\venv\Scripts\Activate.ps1
-# On Linux/macOS:
-# source venv/bin/activate
-
+# Backend
 pip install -r backend/requirements.txt
-```
-
-Run backend server:
-
-```bash
 uvicorn app.main:app --app-dir backend --reload --port 8000
-```
 
-### 3. Frontend Setup
-
-```bash
+# Frontend (in another terminal)
 cd frontend
 npm install
 npm run dev
 ```
 
-Visit [http://localhost:5173](http://localhost:5173) in your browser.
+Visit [http://localhost:5173](http://localhost:5173).
+
+---
+
+## 🚀 Deployment Guide
+
+### Deploying to Google Cloud Run
+
+```bash
+# Build & push Docker image
+gcloud builds submit --tag gcr.io/$PROJECT_ID/scotoma
+
+# Deploy container
+gcloud run deploy scotoma \
+  --image gcr.io/$PROJECT_ID/scotoma \
+  --platform managed \
+  --region us-central1 \
+  --set-env-vars GEMINI_API_KEY=$GEMINI_API_KEY,GEMINI_MODEL=gemini-2.5-flash \
+  --allow-unauthenticated
+```
+
+### Deploying to Render
+
+1. Create a new **Web Service** on Render connected to this repository.
+2. Select environment: **Docker** (Render uses the root `Dockerfile` automatically).
+3. Add Environment Variables:
+   - `GEMINI_API_KEY`: Your Gemini API Key
+   - `GEMINI_MODEL`: `gemini-2.5-flash`
+
+---
+
+## 📁 Built-in Demo Scenarios
+
+Three pre-filled demo scenarios exist in `scenarios/` for quick evaluation:
+1. `scenarios/internship.json` — High-Stipend Internship vs Software Developer Job
+2. `scenarios/relocation.json` — Relocating to London for High Pay vs Staying Local
+3. `scenarios/quit_job.json` — Leaving Stable MNC to Join Early-Stage Startup
+
+---
+
+## 📝 Submission Text
+
+> SCOTOMA helps people see what they can't see in their own reasoning. Gemini turns a decision into structured claims; a Z3 theorem prover then proves contradictions and tests which assumptions the decision depends on; a quote-anchored verifier guarantees every blind spot is grounded in the user's words. It never decides for the user. Stack: React + TypeScript, FastAPI, Z3, OGL (WebGL), Gemini.
 
 ---
 
 ## 🧪 Running Tests
 
-### Backend Tests (pytest)
 ```bash
+# Backend pytest
 pytest
-```
 
-### Frontend Tests (vitest)
-```bash
-cd frontend
-npm test
-```
-
-### Linting
-```bash
-# Backend lint
-ruff check .
-
-# Frontend lint
-cd frontend
-npm run lint
+# Frontend vitest
+cd frontend && npm test
 ```
 
 ---

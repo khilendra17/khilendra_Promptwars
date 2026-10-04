@@ -2,9 +2,11 @@
 
 import logging
 import uuid
+
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
+
 from app.config import settings
 from app.models.schemas import BlindSpot, Question
 from app.services.guardrail import contains_recommendation
@@ -79,6 +81,6 @@ def _fallback_questions(blind_spots: list[BlindSpot]) -> list[Question]:
         elif b.type == "assumption":
             text = f"What evidence would change your confidence in the assumption under {b.lens.replace('_', ' ')}?"
         else:
-            text = f"How do you reconcile the conflicting factors identified in your reasoning?"
+            text = "How do you reconcile the conflicting factors identified in your reasoning?"
         questions.append(Question(id=q_id, blind_spot_id=b.id, text=text))
     return questions

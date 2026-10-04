@@ -1,6 +1,7 @@
 """SCOTOMA analysis pipeline orchestrating extraction, logic, and guardrails."""
 
 import uuid
+
 from app.models.schemas import AnalysisOutput, BlindSpot
 from app.services.extractor import extract_claims
 from app.services.guardrail import validate_blind_spots

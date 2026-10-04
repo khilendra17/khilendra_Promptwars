@@ -1,9 +1,10 @@
 """Gemini extractor service producing structured ClaimGraph from user reasoning."""
 
-import json
 import logging
+
 from google import genai
 from google.genai import types
+
 from app.config import settings
 from app.models.schemas import ClaimGraph
 from app.services.guardrail import verify_quote_substring

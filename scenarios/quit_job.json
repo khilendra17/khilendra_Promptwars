@@ -1,0 +1,7 @@
+{
+  "id": "quit_job",
+  "title": "Leaving Stable MNC to Join Early-Stage Startup",
+  "options": ["Join Early-Stage Startup", "Stay at Stable MNC"],
+  "reasoning": "The startup offers VP of Engineering title and 1% equity with cutting-edge AI tech. But runway is only 9 months, health insurance benefits are minimal, and work hours will likely double.",
+  "context": "5 years experience in enterprise corporate."
+}

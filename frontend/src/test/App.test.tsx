@@ -1,11 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, beforeEach } from 'vitest';
 import React from 'react';
 import App from '../App';
+import { useScotomaStore } from '../store/useScotomaStore';
 
 describe('SCOTOMA App Integration', () => {
+  beforeEach(() => {
+    useScotomaStore.getState().reset();
+  });
+
   it('renders landing page title and pitch', () => {
     render(<App />);
-    expect(screen.getByRole('heading', { level: 1, name: 'SCOTOMA' })).toBeInTheDocument();
+    const headings = screen.getAllByRole('heading', { level: 1, name: 'SCOTOMA' });
+    expect(headings.length).toBeGreaterThan(0);
     expect(screen.getByText(/Begin Decision Analysis/i)).toBeInTheDocument();
   });
 

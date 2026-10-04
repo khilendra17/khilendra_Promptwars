@@ -1,7 +1,9 @@
 """Database setup using SQLModel and SQLite."""
 
 from collections.abc import Generator
+
 from sqlmodel import Session, SQLModel, create_engine
+
 from app.config import settings
 
 engine = create_engine(

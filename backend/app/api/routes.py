@@ -2,10 +2,12 @@
 
 import uuid
 from typing import Any
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from sqlmodel import Session, select
+
 from app.db import get_session
 from app.models.db_models import AnalysisRecord, AnswerRecord, SessionRecord
 from app.models.schemas import AnswerCreate, SessionCreate
@@ -79,7 +81,9 @@ def analyze_session(
         session_rec.status = "failed"
         db.add(session_rec)
         db.commit()
-        raise HTTPException(status_code=500, detail=f"Analysis failed: {exc}")
+        raise HTTPException(
+            status_code=500, detail=f"Analysis failed: {exc}"
+        ) from exc
 
 
 @router.post("/sessions/{session_id}/answers")

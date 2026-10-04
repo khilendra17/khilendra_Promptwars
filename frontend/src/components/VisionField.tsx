@@ -48,10 +48,14 @@ export const VisionField: React.FC = () => {
       return;
     }
 
+    let animationId: number = 0;
+    let glCanvas: HTMLCanvasElement | null = null;
+
     try {
       const renderer = new Renderer({ width: 340, height: 340, alpha: true });
       const gl = renderer.gl;
-      containerRef.current.appendChild(gl.canvas);
+      glCanvas = gl.canvas;
+      containerRef.current.appendChild(glCanvas);
 
       const geometry = new Triangle(gl);
       const program = new Program(gl, {
@@ -61,21 +65,20 @@ export const VisionField: React.FC = () => {
       });
       const mesh = new Mesh(gl, { geometry, program });
 
-      let animationId: number;
       const renderLoop = (t: number) => {
         program.uniforms.uTime.value = t * 0.001;
         renderer.render({ scene: mesh });
         animationId = requestAnimationFrame(renderLoop);
       };
       animationId = requestAnimationFrame(renderLoop);
-
-      return () => {
-        cancelAnimationFrame(animationId);
-        if (gl.canvas.parentNode) gl.canvas.parentNode.removeChild(gl.canvas);
-      };
     } catch {
       setWebglSupported(false);
     }
+
+    return () => {
+      if (animationId) cancelAnimationFrame(animationId);
+      if (glCanvas && glCanvas.parentNode) glCanvas.parentNode.removeChild(glCanvas);
+    };
   }, []);
 
   return (

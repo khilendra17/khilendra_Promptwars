@@ -1,11 +1,12 @@
 """Tests for FastAPI endpoints and input validation."""
 
 from unittest.mock import patch
+
 import pytest
-from fastapi.testclient import TestClient
 from app.db import init_db
 from app.main import app
 from app.models.schemas import Claim, ClaimGraph
+from fastapi.testclient import TestClient
 
 client = TestClient(app)
 
