@@ -1,4 +1,4 @@
-/** Scanning screen component displaying live pipeline execution status. */
+/** Glassmorphic Scanning Screen component. */
 
 import React, { useEffect, useState } from 'react';
 import { VisionField } from '../components/VisionField';
@@ -29,18 +29,18 @@ export const ScanningScreen: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '75vh',
-        gap: '2rem',
-        padding: '1rem',
+        gap: '2.5rem',
+        padding: '1.5rem',
       }}
     >
       <VisionField />
 
-      <div className="brutalist-card" style={{ width: '100%', maxWidth: '500px' }}>
-        <h3 className="mono-font" style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
-          ⚡ SCANNING DECISION FIELD
+      <div className="glass-card" style={{ width: '100%', maxWidth: '540px' }}>
+        <h3 className="mono-font" style={{ fontSize: '1rem', color: 'var(--cyan-glow)', marginBottom: '1.25rem' }}>
+          ⚡ EXECUTING NEURO-SYMBOLIC PIPELINE
         </h3>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           {STEPS.map((step, idx) => {
             const isDone = idx < currentStepIdx;
             const isCurrent = idx === currentStepIdx;
@@ -52,11 +52,12 @@ export const ScanningScreen: React.FC = () => {
                 style={{
                   fontSize: '0.85rem',
                   color: isCurrent
-                    ? 'var(--vermilion)'
+                    ? 'var(--cyan-glow)'
                     : isDone
-                    ? 'var(--verdigris)'
-                    : 'var(--oxide)',
+                    ? 'var(--emerald-safe)'
+                    : 'var(--text-muted)',
                   fontWeight: isCurrent ? 700 : 400,
+                  transition: 'all 0.3s ease',
                 }}
               >
                 {isDone ? '✓ ' : isCurrent ? '➔ ' : '  '}

@@ -1,4 +1,4 @@
-/** Describe screen component for user decision entry. */
+/** Glassmorphic Describe Screen component. */
 
 import React, { useState } from 'react';
 import { createSession, runAnalysis } from '../lib/api';
@@ -91,19 +91,23 @@ export const DescribeScreen: React.FC<DescribeScreenProps> = ({
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
-      <div className="brutalist-card">
-        <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Describe Your Decision</h2>
+    <div style={{ maxWidth: '850px', margin: '2.5rem auto', padding: '0 1.5rem' }}>
+      <div className="glass-card">
+        <h2 style={{ fontSize: '2.25rem', fontWeight: 700, marginBottom: '1.5rem', color: '#FFF' }}>
+          Describe Your Decision
+        </h2>
 
         {error && (
           <div
             className="mono-font"
             style={{
-              padding: '0.75rem',
-              backgroundColor: 'var(--vermilion)',
-              color: '#FFF',
-              marginBottom: '1rem',
-              fontWeight: 700,
+              padding: '0.85rem 1rem',
+              background: 'rgba(255, 51, 102, 0.2)',
+              border: '1px solid var(--vermilion-neon)',
+              borderRadius: '10px',
+              color: '#FF85A3',
+              marginBottom: '1.25rem',
+              fontSize: '0.9rem',
             }}
           >
             ⚠️ {error}
@@ -111,78 +115,78 @@ export const DescribeScreen: React.FC<DescribeScreenProps> = ({
         )}
 
         <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '1.25rem' }}>
-            <label className="mono-font" style={{ display: 'block', fontWeight: 700, marginBottom: '0.4rem' }}>
-              Decision Title *
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--cyan-glow)', marginBottom: '0.4rem' }}>
+              DECISION TITLE *
             </label>
             <input
               type="text"
-              className="brutalist-input"
-              placeholder="e.g. Internship vs Remote Software Engineer Role"
+              className="glass-input"
+              placeholder="e.g. High-Stipend Internship vs Remote Software Engineer Role"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
 
-          <div style={{ marginBottom: '1.25rem' }}>
-            <label className="mono-font" style={{ display: 'block', fontWeight: 700, marginBottom: '0.4rem' }}>
-              Options (2 to 4) *
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--cyan-glow)', marginBottom: '0.4rem' }}>
+              OPTIONS (2 TO 4) *
             </label>
             {options.map((opt, i) => (
               <div key={i} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
                 <input
                   type="text"
-                  className="brutalist-input"
+                  className="glass-input"
                   placeholder={`Option ${i + 1}`}
                   value={opt}
                   onChange={(e) => handleOptionChange(i, e.target.value)}
                 />
                 {options.length > 2 && (
-                  <button type="button" className="brutalist-btn" onClick={() => removeOption(i)}>
+                  <button type="button" className="btn-outline" onClick={() => removeOption(i)}>
                     ✕
                   </button>
                 )}
               </div>
             ))}
             {options.length < 4 && (
-              <button type="button" className="brutalist-btn" style={{ fontSize: '0.8rem' }} onClick={addOption}>
+              <button type="button" className="btn-outline" style={{ fontSize: '0.8rem', marginTop: '0.25rem' }} onClick={addOption}>
                 + Add Option
               </button>
             )}
           </div>
 
-          <div style={{ marginBottom: '1.25rem' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
-              <label className="mono-font" style={{ fontWeight: 700 }}>
-                My Reasoning & Stated Beliefs *
+              <label className="mono-font" style={{ fontSize: '0.85rem', color: 'var(--cyan-glow)' }}>
+                MY REASONING & STATED BELIEFS *
               </label>
-              <span className="mono-font" style={{ fontSize: '0.8rem' }}>
-                {reasoning.length} / 3000 chars
+              <span className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                {reasoning.length} / 3000
               </span>
             </div>
             <textarea
-              className="brutalist-textarea"
+              className="glass-textarea"
               rows={6}
-              placeholder="Describe your thoughts, pros/cons, constraints, and why you favor certain choices..."
+              placeholder="Describe your reasoning, trade-offs, constraints, and why you favor certain options..."
               value={reasoning}
               onChange={(e) => setReasoning(e.target.value)}
             />
           </div>
 
-          <div style={{ marginBottom: '1.5rem' }}>
-            <label className="mono-font" style={{ display: 'block', fontWeight: 700, marginBottom: '0.4rem' }}>
-              Constraints & Additional Context (Optional)
+          <div style={{ marginBottom: '2rem' }}>
+            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--cyan-glow)', marginBottom: '0.4rem' }}>
+              CONSTRAINTS & ADDITIONAL CONTEXT (OPTIONAL)
             </label>
             <input
               type="text"
-              className="brutalist-input"
-              placeholder="e.g. Must decide by Friday, spouse support needed"
+              className="glass-input"
+              placeholder="e.g. Must decide by Friday, family relocation constraint"
               value={context}
               onChange={(e) => setContext(e.target.value)}
             />
           </div>
 
-          <button type="submit" className="brutalist-btn" style={{ width: '100%', fontSize: '1.1rem' }}>
+          <button type="submit" className="btn-glow" style={{ width: '100%', fontSize: '1.1rem', padding: '1rem' }}>
             Run Neuro-Symbolic Scan ➔
           </button>
         </form>

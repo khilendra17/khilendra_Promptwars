@@ -28,10 +28,10 @@ const FRAGMENT_SHADER = /* glsl */ `
   void main() {
     vec2 st = vUv - 0.5;
     float dist = length(st);
-    float grid = abs(sin(dist * 30.0 - uTime * 0.5)) * 0.15;
-    vec3 color = mix(vec3(0.16, 0.10, 0.18), vec3(0.09, 0.06, 0.10), dist * 2.0);
-    color += vec3(grid * 0.4, grid * 0.2, grid * 0.5);
-    gl_FragColor = vec4(color, 1.0);
+    float grid = abs(sin(dist * 25.0 - uTime * 0.6)) * 0.2;
+    vec3 baseColor = mix(vec3(0.04, 0.06, 0.12), vec3(0.01, 0.02, 0.05), dist * 2.0);
+    vec3 glowColor = vec3(0.0, 0.94, 1.0) * grid * 0.5;
+    gl_FragColor = vec4(baseColor + glowColor, 1.0);
   }
 `;
 
@@ -87,12 +87,14 @@ export const VisionField: React.FC = () => {
         position: 'relative',
         width: '340px',
         height: '340px',
-        backgroundColor: 'var(--plum-night)',
-        border: '3px solid var(--ink)',
-        boxShadow: '4px 4px 0px var(--ink)',
+        borderRadius: '50%',
+        border: '1px solid rgba(0, 240, 255, 0.4)',
+        boxShadow: '0 0 40px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(0, 240, 255, 0.1)',
+        overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        background: '#070A12',
       }}
     >
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
@@ -101,7 +103,7 @@ export const VisionField: React.FC = () => {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'radial-gradient(circle at center, #2A1B2E 0%, #17140F 100%)',
+            background: 'radial-gradient(circle at center, #0B1120 0%, #030509 100%)',
           }}
         />
       )}
@@ -129,15 +131,16 @@ export const VisionField: React.FC = () => {
               width: '24px',
               height: '24px',
               borderRadius: '50%',
-              border: '2px solid var(--ink)',
-              backgroundColor: isCovered ? 'var(--uv-lime)' : 'var(--vermilion)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              backgroundColor: isCovered ? 'var(--cyan-glow)' : 'var(--vermilion-neon)',
               boxShadow: isHovered
-                ? '0 0 10px 4px var(--uv-lime)'
+                ? '0 0 16px 6px var(--cyan-glow)'
                 : isCovered
-                ? '0 0 6px var(--uv-lime)'
-                : '0 0 4px var(--vermilion)',
+                ? '0 0 10px var(--cyan-glow)'
+                : '0 0 10px var(--vermilion-neon)',
               cursor: 'pointer',
               zIndex: 10,
+              transition: 'all 0.2s ease',
             }}
           />
         );

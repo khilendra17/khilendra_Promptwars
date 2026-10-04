@@ -1,4 +1,4 @@
-/** Component rendering assumption fragility bar and score details. */
+/** Glassmorphic fragility bar component. */
 
 import React from 'react';
 import { Fragility } from '../types';
@@ -13,49 +13,52 @@ export const FragilityBar: React.FC<FragilityBarProps> = ({ fragility, assumptio
 
   return (
     <div
+      className="glass-card"
       style={{
-        border: '2px solid var(--ink)',
-        padding: '0.75rem',
-        marginBottom: '0.75rem',
-        backgroundColor: fragility.flips_leader ? '#FFF4F0' : '#F5F5F5',
+        padding: '1rem',
+        marginBottom: '0.85rem',
+        borderColor: fragility.flips_leader ? 'rgba(255, 51, 102, 0.4)' : 'var(--border-glass)',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
-        <span className="mono-font" style={{ fontSize: '0.85rem', fontWeight: 700 }}>
-          {fragility.flips_leader ? '⚠️ LOAD-BEARING ASSUMPTION' : 'ASSUMPTION STABILITY'}
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+        <span className="mono-font" style={{ fontSize: '0.8rem', fontWeight: 700, color: fragility.flips_leader ? 'var(--vermilion-neon)' : 'var(--emerald-safe)' }}>
+          {fragility.flips_leader ? '⚠️ LOAD-BEARING ASSUMPTION' : 'STABLE ASSUMPTION'}
         </span>
-        <span className="mono-font" style={{ fontSize: '0.85rem', fontWeight: 700 }}>
+        <span className="mono-font" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--cyan-glow)' }}>
           {percentage}% Fragility
         </span>
       </div>
 
       {assumptionText && (
-        <p style={{ fontSize: '0.85rem', fontStyle: 'italic', marginBottom: '0.5rem' }}>
+        <p style={{ fontSize: '0.85rem', fontStyle: 'italic', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>
           "{assumptionText}"
         </p>
       )}
 
       {fragility.flips_leader && (
-        <p className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--vermilion)' }}>
-          Flipping this assumption changes leader: <strong>{fragility.leader_before}</strong> ➔{' '}
-          <strong>{fragility.leader_after}</strong>
+        <p className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--vermilion-neon)' }}>
+          Flipping changes leader: <strong>{fragility.leader_before}</strong> ➔ <strong>{fragility.leader_after}</strong>
         </p>
       )}
 
       <div
         style={{
-          height: '10px',
+          height: '8px',
           width: '100%',
-          backgroundColor: 'var(--fog)',
-          border: '1px solid var(--ink)',
-          marginTop: '0.5rem',
+          backgroundColor: 'rgba(255, 255, 255, 0.08)',
+          borderRadius: '4px',
+          overflow: 'hidden',
+          marginTop: '0.6rem',
         }}
       >
         <div
           style={{
             height: '100%',
             width: `${percentage}%`,
-            backgroundColor: fragility.flips_leader ? 'var(--vermilion)' : 'var(--verdigris)',
+            background: fragility.flips_leader
+              ? 'linear-gradient(90deg, #FF3366, #FF6B00)'
+              : 'linear-gradient(90deg, #10B981, #00F0FF)',
+            boxShadow: fragility.flips_leader ? '0 0 10px var(--vermilion-neon)' : '0 0 10px var(--cyan-glow)',
           }}
         />
       </div>

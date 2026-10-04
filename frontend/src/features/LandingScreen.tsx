@@ -1,4 +1,4 @@
-/** Landing screen component for SCOTOMA. */
+/** Glassmorphic Landing Screen for SCOTOMA. */
 
 import React from 'react';
 import { ScenarioChips, DemoScenario } from '../components/ScenarioChips';
@@ -12,60 +12,75 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStartWithScenari
   const { setScreen } = useScotomaStore();
 
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '3rem auto',
-        padding: '0 1rem',
-        textAlign: 'center',
-      }}
-    >
-      <div className="brutalist-card" style={{ padding: '3rem 2rem' }}>
+    <div style={{ maxWidth: '900px', margin: '3.5rem auto', padding: '0 1.5rem', textAlign: 'center' }}>
+      <div className="glass-card" style={{ padding: '3.5rem 2.5rem' }}>
+        <span
+          className="badge-glow"
+          style={{
+            background: 'rgba(139, 92, 246, 0.15)',
+            color: 'var(--purple-z3)',
+            border: '1px solid rgba(139, 92, 246, 0.4)',
+            marginBottom: '1.25rem',
+          }}
+        >
+          FORMAL REASONING & Z3 PROVER
+        </span>
+
         <h1
           style={{
-            fontFamily: 'var(--font-heading)',
-            fontSize: '3rem',
-            marginBottom: '1rem',
+            fontFamily: 'var(--font-main)',
+            fontSize: '3.75rem',
+            fontWeight: 800,
             lineHeight: 1.1,
+            marginBottom: '1.25rem',
+            background: 'linear-gradient(135deg, #FFFFFF 0%, #00F0FF 50%, #8B5CF6 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            letterSpacing: '-1px',
           }}
         >
           SCOTOMA
         </h1>
+
         <p
           className="mono-font"
           style={{
-            fontSize: '1.1rem',
-            marginBottom: '2rem',
-            color: 'var(--oxide)',
+            fontSize: '1.15rem',
+            color: 'var(--cyan-glow)',
+            marginBottom: '1.75rem',
+            fontWeight: 600,
           }}
         >
-          The Neuro-Symbolic Visual Field Analyzer for Critical Decisions.
+          See the unstated blind spots in your strategic decisions.
         </p>
+
         <p
           style={{
-            fontSize: '1.1rem',
-            marginBottom: '2rem',
-            textAlign: 'left',
-            lineHeight: 1.6,
+            fontSize: '1.05rem',
+            color: 'var(--text-muted)',
+            maxWidth: '680px',
+            margin: '0 auto 2.5rem auto',
+            lineHeight: 1.7,
           }}
         >
-          SCOTOMA never recommends an option or decides for you. Instead, it translates your reasoning
-          into a formal logic graph, proves logical contradictions with a Z3 theorem prover, tests load-bearing
-          assumptions, and reveals silent decision lenses you forgot to consider.
+          SCOTOMA never tells you what to choose. Instead, it extracts your stated claims, proves logical
+          contradictions with the <strong>Z3 SMT Theorem Prover</strong>, stress-tests load-bearing assumptions, and maps silent lenses you ignored.
         </p>
 
         <ScenarioChips onSelect={(sc) => onStartWithScenario(sc)} />
 
-        <button
-          className="brutalist-btn"
-          style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}
-          onClick={() => {
-            onStartWithScenario(undefined);
-            setScreen('describe');
-          }}
-        >
-          Begin Decision Analysis ➔
-        </button>
+        <div style={{ marginTop: '2rem' }}>
+          <button
+            className="btn-glow"
+            style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}
+            onClick={() => {
+              onStartWithScenario(undefined);
+              setScreen('describe');
+            }}
+          >
+            Start Visual Field Analysis ➔
+          </button>
+        </div>
       </div>
     </div>
   );

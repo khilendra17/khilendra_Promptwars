@@ -1,4 +1,4 @@
-/** Blind spot card component with question answering interface. */
+/** Blind spot card component with glassmorphism UI. */
 
 import React, { useState } from 'react';
 import { submitAnswer } from '../lib/api';
@@ -36,20 +36,17 @@ export const BlindSpotCard: React.FC<BlindSpotCardProps> = ({ spot }) => {
   };
 
   return (
-    <div
-      className="brutalist-card"
-      style={{ marginBottom: '1.25rem', backgroundColor: '#FDFBF7' }}
-    >
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-        <span className={`badge badge-${spot.type}`}>{spot.type}</span>
-        <span className="mono-font" style={{ fontSize: '0.85rem', fontWeight: 700 }}>
-          Lens: {spot.lens.replace('_', ' ').toUpperCase()}
+    <div className="glass-card" style={{ marginBottom: '1.25rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
+        <span className={`badge-glow badge-${spot.type}`}>{spot.type}</span>
+        <span className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--cyan-glow)' }}>
+          LENS: {spot.lens.replace('_', ' ').toUpperCase()}
         </span>
       </div>
 
       {spot.evidence_quotes.length > 0 && (
-        <div style={{ marginBottom: '0.75rem' }}>
-          <strong className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--oxide)' }}>
+        <div style={{ marginBottom: '0.85rem' }}>
+          <strong className="mono-font" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
             EVIDENCE QUOTE:
           </strong>
           {spot.evidence_quotes.map((q, i) => (
@@ -59,10 +56,11 @@ export const BlindSpotCard: React.FC<BlindSpotCardProps> = ({ spot }) => {
               onMouseLeave={() => setSelectedQuote(null)}
               style={{
                 fontStyle: 'italic',
-                borderLeft: '3px solid var(--vermilion)',
-                paddingLeft: '0.5rem',
-                margin: '0.25rem 0',
+                borderLeft: '3px solid var(--cyan-glow)',
+                paddingLeft: '0.75rem',
+                margin: '0.35rem 0',
                 fontSize: '0.95rem',
+                color: '#E5E7EB',
                 cursor: 'pointer',
               }}
             >
@@ -72,30 +70,33 @@ export const BlindSpotCard: React.FC<BlindSpotCardProps> = ({ spot }) => {
         </div>
       )}
 
-      <p style={{ fontSize: '0.95rem', marginBottom: '1rem' }}>{spot.why_it_matters}</p>
+      <p style={{ fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--text-main)' }}>
+        {spot.why_it_matters}
+      </p>
 
       {questions.map((q) => (
         <div
           key={q.id}
           style={{
-            borderTop: '1px dashed var(--fog)',
-            paddingTop: '0.75rem',
-            marginTop: '0.75rem',
+            borderTop: '1px solid var(--border-glass)',
+            paddingTop: '0.85rem',
+            marginTop: '0.85rem',
           }}
         >
-          <p className="mono-font" style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-            ❓ <strong>Question:</strong> {q.text}
+          <p className="mono-font" style={{ fontSize: '0.85rem', marginBottom: '0.6rem', color: 'var(--cyan-glow)' }}>
+            ❓ {q.text}
           </p>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <input
               type="text"
-              className="brutalist-input"
-              placeholder="Type your response to clarify..."
+              className="glass-input"
+              placeholder="Type your response..."
               value={answers[q.id] || ''}
               onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
             />
             <button
-              className="brutalist-btn"
+              className="btn-glow"
+              style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}
               disabled={submittingId === q.id || !answers[q.id]?.trim()}
               onClick={() => handleAnswerSubmit(q.id)}
             >
