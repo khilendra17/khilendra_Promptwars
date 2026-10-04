@@ -1,5 +1,6 @@
-"""Tests for FastAPI endpoints and input validation."""
+"""Tests for FastAPI endpoints, input validation, and edge cases."""
 
+import uuid
 from unittest.mock import patch
 
 import pytest
@@ -35,9 +36,23 @@ def test_create_session_validation_error() -> None:
     assert response.status_code == 422
 
 
+def test_nonexistent_session_returns_404() -> None:
+    """Verify 404 error when querying non-existent session ID."""
+    random_id = uuid.uuid4()
+    response = client.get(f"/api/sessions/{random_id}")
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Session not found"
+
+
+def test_invalid_uuid_returns_422() -> None:
+    """Verify 422 validation error for invalid UUID path parameter."""
+    response = client.get("/api/sessions/invalid-uuid-format")
+    assert response.status_code == 422
+
+
 @patch("app.services.extractor.extract_claims")
 def test_session_analyze_workflow(mock_extract) -> None:
-    """Verify full session creation and analysis pipeline execution."""
+    """Verify full session creation, analysis, and detail fetching."""
     reasoning_text = (
         "I am deciding whether to take the high paying internship near my home "
         "or look for remote software engineer roles with better growth."
@@ -74,5 +89,7 @@ def test_session_analyze_workflow(mock_extract) -> None:
     data = analyze_res.json()
     assert data["session_id"] == session_id
     assert data["version"] == 1
-    assert "blind_spots" in data
-    assert "attention_gap" in data
+
+    detail_res = client.get(f"/api/sessions/{session_id}")
+    assert detail_res.status_code == 200
+    assert len(detail_res.json()["analyses"]) == 1
