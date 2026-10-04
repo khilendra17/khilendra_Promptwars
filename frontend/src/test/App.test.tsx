@@ -12,18 +12,18 @@ describe('SCOTOMA App Integration', () => {
     render(<App />);
     const headings = screen.getAllByRole('heading', { level: 1, name: 'SCOTOMA' });
     expect(headings.length).toBeGreaterThan(0);
-    expect(screen.getByText(/Begin Decision Analysis|Start Visual Field Analysis/i)).toBeInTheDocument();
+    expect(screen.getByText(/Launch Visual Field Workspace/i)).toBeInTheDocument();
   });
 
-  it('navigates to describe screen on clicking Begin', () => {
+  it('navigates to describe screen on clicking Launch Workspace', () => {
     render(<App />);
-    fireEvent.click(screen.getByText(/Start Visual Field Analysis/i));
-    expect(screen.getByText(/Describe Your Decision/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByText(/Launch Visual Field Workspace/i));
+    expect(screen.getByText(/Describe Decision/i)).toBeInTheDocument();
   });
 
   it('validates decision input minimum lengths', () => {
     render(<App />);
-    fireEvent.click(screen.getByText(/Start Visual Field Analysis/i));
+    fireEvent.click(screen.getByText(/Launch Visual Field Workspace/i));
     fireEvent.click(screen.getByText(/Run Neuro-Symbolic Scan/i));
     expect(screen.getByText(/Title must be at least 3 characters/i)).toBeInTheDocument();
   });

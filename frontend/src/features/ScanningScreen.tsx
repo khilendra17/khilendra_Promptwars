@@ -1,4 +1,4 @@
-/** Glassmorphic Scanning Screen component. */
+/** Glassmorphic Purple Scanning Screen component. */
 
 import React, { useEffect, useState } from 'react';
 import { VisionField } from '../components/VisionField';
@@ -35,9 +35,9 @@ export const ScanningScreen: React.FC = () => {
     >
       <VisionField />
 
-      <div className="glass-card" style={{ width: '100%', maxWidth: '540px' }}>
-        <h3 className="mono-font" style={{ fontSize: '1rem', color: 'var(--cyan-glow)', marginBottom: '1.25rem' }}>
-          ⚡ EXECUTING NEURO-SYMBOLIC PIPELINE
+      <div className="glass-card-purple" style={{ width: '100%', maxWidth: '560px' }}>
+        <h3 className="mono-font" style={{ fontSize: '1rem', color: 'var(--bright-lavender)', marginBottom: '1.25rem' }}>
+          ⚡ EXECUTING Z3 NEURO-SYMBOLIC SOLVER
         </h3>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
@@ -52,9 +52,9 @@ export const ScanningScreen: React.FC = () => {
                 style={{
                   fontSize: '0.85rem',
                   color: isCurrent
-                    ? 'var(--cyan-glow)'
+                    ? 'var(--bright-lavender)'
                     : isDone
-                    ? 'var(--emerald-safe)'
+                    ? 'var(--neon-violet)'
                     : 'var(--text-muted)',
                   fontWeight: isCurrent ? 700 : 400,
                   transition: 'all 0.3s ease',

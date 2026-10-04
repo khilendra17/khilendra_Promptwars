@@ -1,4 +1,4 @@
-/** Glassmorphic fragility bar component. */
+/** Glassmorphic purple fragility bar component. */
 
 import React from 'react';
 import { Fragility } from '../types';
@@ -13,18 +13,18 @@ export const FragilityBar: React.FC<FragilityBarProps> = ({ fragility, assumptio
 
   return (
     <div
-      className="glass-card"
+      className="glass-card-purple"
       style={{
         padding: '1rem',
         marginBottom: '0.85rem',
-        borderColor: fragility.flips_leader ? 'rgba(255, 51, 102, 0.4)' : 'var(--border-glass)',
+        borderColor: fragility.flips_leader ? 'rgba(255, 51, 102, 0.5)' : 'var(--border-purple-glow)',
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-        <span className="mono-font" style={{ fontSize: '0.8rem', fontWeight: 700, color: fragility.flips_leader ? 'var(--vermilion-neon)' : 'var(--emerald-safe)' }}>
+        <span className="mono-font" style={{ fontSize: '0.8rem', fontWeight: 700, color: fragility.flips_leader ? '#FF6699' : 'var(--bright-lavender)' }}>
           {fragility.flips_leader ? '⚠️ LOAD-BEARING ASSUMPTION' : 'STABLE ASSUMPTION'}
         </span>
-        <span className="mono-font" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--cyan-glow)' }}>
+        <span className="mono-font" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--bright-lavender)' }}>
           {percentage}% Fragility
         </span>
       </div>
@@ -36,7 +36,7 @@ export const FragilityBar: React.FC<FragilityBarProps> = ({ fragility, assumptio
       )}
 
       {fragility.flips_leader && (
-        <p className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--vermilion-neon)' }}>
+        <p className="mono-font" style={{ fontSize: '0.8rem', color: '#FF6699' }}>
           Flipping changes leader: <strong>{fragility.leader_before}</strong> ➔ <strong>{fragility.leader_after}</strong>
         </p>
       )}
@@ -56,9 +56,9 @@ export const FragilityBar: React.FC<FragilityBarProps> = ({ fragility, assumptio
             height: '100%',
             width: `${percentage}%`,
             background: fragility.flips_leader
-              ? 'linear-gradient(90deg, #FF3366, #FF6B00)'
-              : 'linear-gradient(90deg, #10B981, #00F0FF)',
-            boxShadow: fragility.flips_leader ? '0 0 10px var(--vermilion-neon)' : '0 0 10px var(--cyan-glow)',
+              ? 'linear-gradient(90deg, #FF3366, #B026FF)'
+              : 'linear-gradient(90deg, #8B00FF, #B026FF)',
+            boxShadow: fragility.flips_leader ? '0 0 10px #FF3366' : '0 0 10px var(--neon-violet)',
           }}
         />
       </div>

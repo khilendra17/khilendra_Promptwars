@@ -1,4 +1,4 @@
-/** Glassmorphic Describe Screen component. */
+/** Electric Purple Glass Describe Screen component. */
 
 import React, { useState } from 'react';
 import { createSession, runAnalysis } from '../lib/api';
@@ -91,10 +91,10 @@ export const DescribeScreen: React.FC<DescribeScreenProps> = ({
   };
 
   return (
-    <div style={{ maxWidth: '850px', margin: '2.5rem auto', padding: '0 1.5rem' }}>
-      <div className="glass-card">
-        <h2 style={{ fontSize: '2.25rem', fontWeight: 700, marginBottom: '1.5rem', color: '#FFF' }}>
-          Describe Your Decision
+    <div style={{ maxWidth: '880px', margin: '2.5rem auto', padding: '0 1.5rem' }}>
+      <div className="glass-card-purple">
+        <h2 className="heading-font" style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--white)' }}>
+          Describe Decision & Stated Reasoning
         </h2>
 
         {error && (
@@ -102,10 +102,10 @@ export const DescribeScreen: React.FC<DescribeScreenProps> = ({
             className="mono-font"
             style={{
               padding: '0.85rem 1rem',
-              background: 'rgba(255, 51, 102, 0.2)',
-              border: '1px solid var(--vermilion-neon)',
+              background: 'rgba(255, 51, 102, 0.25)',
+              border: '1px solid #FF3366',
               borderRadius: '10px',
-              color: '#FF85A3',
+              color: '#FF99BB',
               marginBottom: '1.25rem',
               fontSize: '0.9rem',
             }}
@@ -116,40 +116,40 @@ export const DescribeScreen: React.FC<DescribeScreenProps> = ({
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1.5rem' }}>
-            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--cyan-glow)', marginBottom: '0.4rem' }}>
+            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--bright-lavender)', marginBottom: '0.4rem' }}>
               DECISION TITLE *
             </label>
             <input
               type="text"
-              className="glass-input"
-              placeholder="e.g. High-Stipend Internship vs Remote Software Engineer Role"
+              className="purple-input"
+              placeholder="e.g. High-Stipend Internship vs Remote Software Developer Role"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
 
           <div style={{ marginBottom: '1.5rem' }}>
-            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--cyan-glow)', marginBottom: '0.4rem' }}>
+            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--bright-lavender)', marginBottom: '0.4rem' }}>
               OPTIONS (2 TO 4) *
             </label>
             {options.map((opt, i) => (
               <div key={i} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
                 <input
                   type="text"
-                  className="glass-input"
+                  className="purple-input"
                   placeholder={`Option ${i + 1}`}
                   value={opt}
                   onChange={(e) => handleOptionChange(i, e.target.value)}
                 />
                 {options.length > 2 && (
-                  <button type="button" className="btn-outline" onClick={() => removeOption(i)}>
+                  <button type="button" className="btn-ghost-purple" onClick={() => removeOption(i)}>
                     ✕
                   </button>
                 )}
               </div>
             ))}
             {options.length < 4 && (
-              <button type="button" className="btn-outline" style={{ fontSize: '0.8rem', marginTop: '0.25rem' }} onClick={addOption}>
+              <button type="button" className="btn-ghost-purple" style={{ fontSize: '0.8rem', marginTop: '0.25rem' }} onClick={addOption}>
                 + Add Option
               </button>
             )}
@@ -157,36 +157,36 @@ export const DescribeScreen: React.FC<DescribeScreenProps> = ({
 
           <div style={{ marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
-              <label className="mono-font" style={{ fontSize: '0.85rem', color: 'var(--cyan-glow)' }}>
-                MY REASONING & STATED BELIEFS *
+              <label className="mono-font" style={{ fontSize: '0.85rem', color: 'var(--bright-lavender)' }}>
+                STATED REASONING & BELIEFS *
               </label>
               <span className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                 {reasoning.length} / 3000
               </span>
             </div>
             <textarea
-              className="glass-textarea"
+              className="purple-textarea"
               rows={6}
-              placeholder="Describe your reasoning, trade-offs, constraints, and why you favor certain options..."
+              placeholder="Describe your reasoning, pros/cons, constraints, and underlying assumptions..."
               value={reasoning}
               onChange={(e) => setReasoning(e.target.value)}
             />
           </div>
 
           <div style={{ marginBottom: '2rem' }}>
-            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--cyan-glow)', marginBottom: '0.4rem' }}>
-              CONSTRAINTS & ADDITIONAL CONTEXT (OPTIONAL)
+            <label className="mono-font" style={{ display: 'block', fontSize: '0.85rem', color: 'var(--bright-lavender)', marginBottom: '0.4rem' }}>
+              CONSTRAINTS & CONTEXT (OPTIONAL)
             </label>
             <input
               type="text"
-              className="glass-input"
-              placeholder="e.g. Must decide by Friday, family relocation constraint"
+              className="purple-input"
+              placeholder="e.g. Decision deadline Friday, family support constraint"
               value={context}
               onChange={(e) => setContext(e.target.value)}
             />
           </div>
 
-          <button type="submit" className="btn-glow" style={{ width: '100%', fontSize: '1.1rem', padding: '1rem' }}>
+          <button type="submit" className="btn-electric" style={{ width: '100%', fontSize: '1.15rem', padding: '1.1rem' }}>
             Run Neuro-Symbolic Scan ➔
           </button>
         </form>

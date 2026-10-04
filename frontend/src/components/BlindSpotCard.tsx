@@ -1,4 +1,4 @@
-/** Blind spot card component with glassmorphism UI. */
+/** Electric purple glass blind spot card. */
 
 import React, { useState } from 'react';
 import { submitAnswer } from '../lib/api';
@@ -36,10 +36,10 @@ export const BlindSpotCard: React.FC<BlindSpotCardProps> = ({ spot }) => {
   };
 
   return (
-    <div className="glass-card" style={{ marginBottom: '1.25rem' }}>
+    <div className="glass-card-purple" style={{ marginBottom: '1.25rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.85rem' }}>
-        <span className={`badge-glow badge-${spot.type}`}>{spot.type}</span>
-        <span className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--cyan-glow)' }}>
+        <span className={`badge-purple badge-${spot.type}`}>{spot.type}</span>
+        <span className="mono-font" style={{ fontSize: '0.8rem', color: 'var(--bright-lavender)' }}>
           LENS: {spot.lens.replace('_', ' ').toUpperCase()}
         </span>
       </div>
@@ -56,11 +56,11 @@ export const BlindSpotCard: React.FC<BlindSpotCardProps> = ({ spot }) => {
               onMouseLeave={() => setSelectedQuote(null)}
               style={{
                 fontStyle: 'italic',
-                borderLeft: '3px solid var(--cyan-glow)',
+                borderLeft: '3px solid var(--neon-violet)',
                 paddingLeft: '0.75rem',
                 margin: '0.35rem 0',
                 fontSize: '0.95rem',
-                color: '#E5E7EB',
+                color: 'var(--bright-lavender)',
                 cursor: 'pointer',
               }}
             >
@@ -70,7 +70,7 @@ export const BlindSpotCard: React.FC<BlindSpotCardProps> = ({ spot }) => {
         </div>
       )}
 
-      <p style={{ fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--text-main)' }}>
+      <p style={{ fontSize: '0.95rem', marginBottom: '1rem', color: 'var(--white)' }}>
         {spot.why_it_matters}
       </p>
 
@@ -78,24 +78,24 @@ export const BlindSpotCard: React.FC<BlindSpotCardProps> = ({ spot }) => {
         <div
           key={q.id}
           style={{
-            borderTop: '1px solid var(--border-glass)',
+            borderTop: '1px solid var(--border-purple-glow)',
             paddingTop: '0.85rem',
             marginTop: '0.85rem',
           }}
         >
-          <p className="mono-font" style={{ fontSize: '0.85rem', marginBottom: '0.6rem', color: 'var(--cyan-glow)' }}>
+          <p className="mono-font" style={{ fontSize: '0.85rem', marginBottom: '0.6rem', color: 'var(--bright-lavender)' }}>
             ❓ {q.text}
           </p>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <input
               type="text"
-              className="glass-input"
-              placeholder="Type your response..."
+              className="purple-input"
+              placeholder="Type your clarification..."
               value={answers[q.id] || ''}
               onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
             />
             <button
-              className="btn-glow"
+              className="btn-electric"
               style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem' }}
               disabled={submittingId === q.id || !answers[q.id]?.trim()}
               onClick={() => handleAnswerSubmit(q.id)}

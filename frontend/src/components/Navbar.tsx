@@ -1,4 +1,4 @@
-/** Glassmorphic navbar component for SCOTOMA. */
+/** Electric Purple Glass Navbar Component. */
 
 import React from 'react';
 import { useScotomaStore } from '../store/useScotomaStore';
@@ -13,8 +13,8 @@ export const Navbar: React.FC = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '1.25rem 2.5rem',
-        borderBottom: '1px solid var(--border-glass)',
-        backgroundColor: 'rgba(10, 14, 23, 0.85)',
+        borderBottom: '1px solid var(--border-purple-glow)',
+        backgroundColor: 'rgba(8, 6, 16, 0.9)',
         backdropFilter: 'blur(20px)',
         position: 'sticky',
         top: 0,
@@ -24,12 +24,12 @@ export const Navbar: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
         <h1
           onClick={reset}
+          className="heading-font"
           style={{
-            fontFamily: 'var(--font-main)',
             fontWeight: 800,
-            fontSize: '1.8rem',
+            fontSize: '1.9rem',
             cursor: 'pointer',
-            background: 'linear-gradient(135deg, #00F0FF 0%, #7000FF 100%)',
+            background: 'linear-gradient(135deg, #FFFFFF 0%, #B026FF 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             letterSpacing: '-0.5px',
@@ -38,24 +38,25 @@ export const Navbar: React.FC = () => {
           SCOTOMA
         </h1>
         <span
-          className="badge-glow"
+          className="badge-purple"
           style={{
-            background: 'rgba(0, 240, 255, 0.1)',
-            color: 'var(--cyan-glow)',
-            border: '1px solid rgba(0, 240, 255, 0.3)',
+            background: 'rgba(176, 38, 255, 0.15)',
+            color: 'var(--bright-lavender)',
+            border: '1px solid var(--border-purple-bright)',
+            boxShadow: '0 0 15px rgba(176, 38, 255, 0.2)',
           }}
         >
-          NEURO-SYMBOLIC VISION FIELD
+          Z3 NEURO-SYMBOLIC CORE
         </span>
       </div>
 
       {latestAnalysis && currentScreen !== 'landing' && (
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <span className="mono-font" style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            Analysis: <strong style={{ color: 'var(--cyan-glow)' }}>v{latestAnalysis.version}</strong>
+            Analysis: <strong style={{ color: 'var(--bright-lavender)' }}>v{latestAnalysis.version}</strong>
           </span>
-          <button className="btn-outline" onClick={() => setScreen('summary')}>
-            Executive Summary
+          <button className="btn-ghost-purple" onClick={() => setScreen('summary')}>
+            Executive Report ➔
           </button>
         </div>
       )}

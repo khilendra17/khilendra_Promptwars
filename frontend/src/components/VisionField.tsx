@@ -1,4 +1,4 @@
-/** Vision Field component rendering GLSL perimetry shader with fallback. */
+/** Vision Field component rendering GLSL perimetry shader with electric purple theme. */
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
@@ -28,9 +28,9 @@ const FRAGMENT_SHADER = /* glsl */ `
   void main() {
     vec2 st = vUv - 0.5;
     float dist = length(st);
-    float grid = abs(sin(dist * 25.0 - uTime * 0.6)) * 0.2;
-    vec3 baseColor = mix(vec3(0.04, 0.06, 0.12), vec3(0.01, 0.02, 0.05), dist * 2.0);
-    vec3 glowColor = vec3(0.0, 0.94, 1.0) * grid * 0.5;
+    float grid = abs(sin(dist * 30.0 - uTime * 0.8)) * 0.25;
+    vec3 baseColor = mix(vec3(0.05, 0.03, 0.10), vec3(0.02, 0.01, 0.04), dist * 2.0);
+    vec3 glowColor = vec3(0.69, 0.15, 1.0) * grid * 0.7;
     gl_FragColor = vec4(baseColor + glowColor, 1.0);
   }
 `;
@@ -88,13 +88,13 @@ export const VisionField: React.FC = () => {
         width: '340px',
         height: '340px',
         borderRadius: '50%',
-        border: '1px solid rgba(0, 240, 255, 0.4)',
-        boxShadow: '0 0 40px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(0, 240, 255, 0.1)',
+        border: '1px solid var(--border-purple-bright)',
+        boxShadow: '0 0 50px rgba(176, 38, 255, 0.3), inset 0 0 30px rgba(139, 0, 255, 0.2)',
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#070A12',
+        background: '#06040A',
       }}
     >
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
@@ -103,7 +103,7 @@ export const VisionField: React.FC = () => {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'radial-gradient(circle at center, #0B1120 0%, #030509 100%)',
+            background: 'radial-gradient(circle at center, #0D0B1A 0%, #050308 100%)',
           }}
         />
       )}
@@ -131,13 +131,13 @@ export const VisionField: React.FC = () => {
               width: '24px',
               height: '24px',
               borderRadius: '50%',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              backgroundColor: isCovered ? 'var(--cyan-glow)' : 'var(--vermilion-neon)',
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              backgroundColor: isCovered ? 'var(--neon-violet)' : '#FF3366',
               boxShadow: isHovered
-                ? '0 0 16px 6px var(--cyan-glow)'
+                ? '0 0 20px 8px var(--bright-lavender)'
                 : isCovered
-                ? '0 0 10px var(--cyan-glow)'
-                : '0 0 10px var(--vermilion-neon)',
+                ? '0 0 12px var(--neon-violet)'
+                : '0 0 12px #FF3366',
               cursor: 'pointer',
               zIndex: 10,
               transition: 'all 0.2s ease',
